@@ -3,13 +3,13 @@
 ** facilitate plist
 *plist* (property list) form
 
-#+BEGIN_SRC lisp :export code
+#+BEGIN_SRC lisp :exports code
   '(:a 1 :b 2 :c 3)
 #+END_SRC
 
 *getf* function
 
-#+BEGIN_SRC lisp :export both
+#+BEGIN_SRC lisp :exports both
   (getf '(:a 1 :b 2 :c 3) :a)
 #+END_SRC
 
@@ -18,14 +18,14 @@
 
 ** make a plist representing a cd
 
-#+BEGIN_SRC lisp :export code
+#+BEGIN_SRC lisp :exports code
   (defun make-cd (title artist rating ripped)
     (list :title title :artist artist :rating rating :ripped ripped))
 #+END_SRC
 
 example:
 
-#+BEGIN_SRC lisp :export both
+#+BEGIN_SRC lisp :exports both
   (make-cd "Roses" "Kathy Mattea" 7 t)
 #+END_SRC
 
@@ -34,7 +34,7 @@ example:
 
 * Filing CDs
 
-#+BEGIN_SRC lisp :export both
+#+BEGIN_SRC lisp :exports both
   (defvar *db* nil)
   (defun add-record (cd) (push cd *db*))
 
@@ -50,7 +50,7 @@ example:
 
 * Looking at the Database Contents
 
-#+BEGIN_SRC lisp :export code
+#+BEGIN_SRC lisp :exports code
   (defun dump-db ()
     (format t "~{~{~a:~10t~a~%~}~%~}" *db*))
 #+END_SRC
@@ -85,7 +85,7 @@ RIPPED:   T
 
 * Improving the User Interaction
 
-#+BEGIN_SRC lisp :export code
+#+BEGIN_SRC lisp :exports code
   (defun prompt-read (prompt)
     (format *query-io* "~a: " prompt)
     (force-output *query-io*)
@@ -95,4 +95,4 @@ RIPPED:   T
 #+RESULTS:
 : PROMPT-READ
 
-¥Ÿ¿Ω ¡¯µµ: 'prompt-for-cd ()' ±∏«ˆ
+Îã§Ïùå ÏßÑÎèÑ: 'prompt-for-cd ()' Íµ¨ÌòÑ
