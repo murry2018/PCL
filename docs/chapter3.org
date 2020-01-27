@@ -1,0 +1,98 @@
+* CDs and Records
+
+** facilitate plist
+*plist* (property list) form
+
+#+BEGIN_SRC lisp :export code
+  '(:a 1 :b 2 :c 3)
+#+END_SRC
+
+*getf* function
+
+#+BEGIN_SRC lisp :export both
+  (getf '(:a 1 :b 2 :c 3) :a)
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+** make a plist representing a cd
+
+#+BEGIN_SRC lisp :export code
+  (defun make-cd (title artist rating ripped)
+    (list :title title :artist artist :rating rating :ripped ripped))
+#+END_SRC
+
+example:
+
+#+BEGIN_SRC lisp :export both
+  (make-cd "Roses" "Kathy Mattea" 7 t)
+#+END_SRC
+
+#+RESULTS:
+| :TITLE | Roses | :ARTIST | Kathy Mattea | :RATING | 7 | :RIPPED | T |
+
+* Filing CDs
+
+#+BEGIN_SRC lisp :export both
+  (defvar *db* nil)
+  (defun add-record (cd) (push cd *db*))
+
+  (add-record (make-cd "Roses" "Kathy Mattea" 7 t))
+  (add-record (make-cd "Fly" "Dixie Chicks" 8 t))
+  (add-record (make-cd "Home" "Dixie Chicks" 9 t))
+#+END_SRC
+
+#+RESULTS:
+| :TITLE | Home  | :ARTIST | Dixie Chicks | :RATING | 9 | :RIPPED | T |
+| :TITLE | Fly   | :ARTIST | Dixie Chicks | :RATING | 8 | :RIPPED | T |
+| :TITLE | Roses | :ARTIST | Kathy Mattea | :RATING | 7 | :RIPPED | T |
+
+* Looking at the Database Contents
+
+#+BEGIN_SRC lisp :export code
+  (defun dump-db ()
+    (format t "~{~{~a:~10t~a~%~}~%~}" *db*))
+#+END_SRC
+
+#+RESULTS:
+: DUMP-DB
+
+example:
+
+#+BEGIN_SRC lisp :results output
+  (dump-db)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+TITLE:    Home
+ARTIST:   Dixie Chicks
+RATING:   9
+RIPPED:   T
+
+TITLE:    Fly
+ARTIST:   Dixie Chicks
+RATING:   8
+RIPPED:   T
+
+TITLE:    Roses
+ARTIST:   Kathy Mattea
+RATING:   7
+RIPPED:   T
+
+#+end_example
+
+* Improving the User Interaction
+
+#+BEGIN_SRC lisp :export code
+  (defun prompt-read (prompt)
+    (format *query-io* "~a: " prompt)
+    (force-output *query-io*)
+    (read-line *query-io*))
+#+END_SRC
+
+#+RESULTS:
+: PROMPT-READ
+
+다음 진도: 'prompt-for-cd ()' 구현
