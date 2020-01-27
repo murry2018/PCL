@@ -60,7 +60,7 @@ example:
 
 example:
 
-#+BEGIN_SRC lisp :results output
+#+BEGIN_SRC lisp :results output :exports both
   (dump-db)
 #+END_SRC
 
