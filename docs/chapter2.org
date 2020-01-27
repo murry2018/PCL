@@ -1,0 +1,38 @@
+* Environment Settings
+
+- Lisp implementation: SBCL
+- Emacs setting: ob-lisp
+  #+BEGIN_SRC emacs-lisp
+    (require 'ob-lisp)
+
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((js . t)
+       (lisp . t)))
+  #+END_SRC
+- SLIME setting: +SLIME-company
+
+  #+BEGIN_SRC emacs-lisp
+    (add-to-list 'slime-contribs 'slime-fancy)
+    (add-hook 'slime-load-hook
+      (lambda ()
+	(define-key slime-prefix-map (kbd "M-h") 'slime-documentation-lookup)))
+    (setq inferior-lisp-program "sbcl")
+    (setq slime-contribs '(slime-fancy slime-company))
+  #+END_SRC
+
+* Hello World
+:PROPERTIES:
+:header-args:lisp: :results output
+:END:
+
+#+BEGIN_SRC lisp :exports both
+  (defun hello-world ()
+    (format t "hello, world"))
+
+  (hello-world)
+#+END_SRC
+
+#+RESULTS:
+: hello, world
+
