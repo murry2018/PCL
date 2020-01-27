@@ -95,4 +95,59 @@ RIPPED:   T
 #+RESULTS:
 : PROMPT-READ
 
-다음 진도: 'prompt-for-cd ()' 구현
+#+BEGIN_SRC lisp :exports code
+  (defun prompt-for-cd ()
+    (make-cd
+     (prompt-read "Title")
+     (prompt-read "Artist")
+     (or (parse-integer (prompt-read "Rating") :junk-allowed t) 0)
+     (y-or-n-p "Ripped")))
+#+END_SRC
+
+#+RESULTS:
+: PROMPT-FOR-CD
+
+#+BEGIN_SRC lisp :exports code
+  (defun add-cds ()
+    (loop
+       (add-record (prompt-for-cd))
+       (if (not (y-or-n-p "Another?")) 
+	   (return))))
+#+END_SRC
+
+#+RESULTS:
+: ADD-CDS
+
+example:
+
+#+BEGIN_SRC lisp :exports both
+  (add-cds)
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_EXAMPLE
+  CL-USER> (add-cds)
+  Title: Rockin' the Suburbs
+  Artist: BenFolds
+  Rating: 6
+
+  Ripped (y or n) y
+
+  Another? (y or n) y
+  Title: Give Us a Break
+  Artist: Limpopo
+  Rating: 10
+
+  Ripped (y or n) y
+
+  Another? (y or n) y
+  Title: Lyle Lovett
+  Artist: Lyle Lovett
+  Rating: 9
+
+  Ripped (y or n) y
+
+  Another? (y or n) n
+#+END_EXAMPLE
+
+* Saving and Loading the Database
